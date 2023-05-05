@@ -74,36 +74,35 @@ static ArrayList productos= new ArrayList();
                     }
                     break;
                 case 3:
-                    imprimirelim();
-                    System.out.println("Ingrese el indice del producto que quere modificar: ");
-                    int mod3=read.nextInt();
-                    if(mod3>=0&&mod3<productos.size()){
-                        for (Object a : productos) {
-                        if(mod3==productos.indexOf(a)){
-                            if(a instanceof Comidas){
-                                System.out.println("1<-Modificar Nombre");
-                                System.out.println("2<-Modificar Precio");
-                                System.out.println("3<-Modificar si esta vencido o no");
-                                int mod2=read.nextInt();
-                                switch(mod2){
-                                    case 1:
-                                        System.out.println("Ingrese el nuevo nombre: ");
-                                        String nname=read.next();
-                                        ((Comidas)productos.get(mod3)).setNombre(nname);
-                                        break;
-                                    case 2:
-                                        System.out.println("Ingrese el nuevo precio: ");
-                                        Double nprecio=read.nextDouble();
-                                        ((Comidas)productos.get(mod3)).setPrecio(nprecio);
-                                        break;
-                                    case 3:
-                                        System.out.println("");
-                                        break;
-                                        
+                    if(productos.isEmpty()==false){
+                        imprimirelim();
+                        System.out.println("Ingrese el indice del producto que quere modificar: ");
+                        int mod3=read.nextInt();
+                        if(mod3>=0&&mod3<productos.size()){
+                            for (Object a : productos) {
+                            if(mod3==productos.indexOf(a)){
+                                if(a instanceof Comidas){
+                                    System.out.println("1<-Modificar Nombre");
+                                    System.out.println("2<-Modificar Precio");
+                                    System.out.println("3<-Modificar si esta vencido o no");
+                                    int mod2=read.nextInt();
+                                    switch(mod2){
+                                        case 1:
+                                            System.out.println("Ingrese el nuevo nombre: ");
+                                            String nname=read.next();
+                                            ((Comidas)productos.get(mod3)).setNombre(nname);
+                                            break;
+                                        case 2:
+                                            System.out.println("Ingrese el nuevo precio: ");
+                                            Double nprecio=read.nextDouble();
+                                            ((Comidas)productos.get(mod3)).setPrecio(nprecio);
+                                            break;
+                                        case 3:
+                                            System.out.println("");
+                                            break;
+
                                     }
-                                
-                                    
-                                    break;
+                                }
                             }
                             if(a instanceof Bebidas){
                                 System.out.println("1<-Modificar Nombre");
@@ -137,30 +136,33 @@ static ArrayList productos= new ArrayList();
                     imprimirproductos();
                     break;
                 case 5:
-                    Compras com=new Compras();
-                    char seguir='n';
-                    double total=0;
-                    do{
-                        imprimirelim();
-                        System.out.println("Ingrese un index para agregar a la carreta:");
-                        int ind=read.nextInt();
-                        for (Object a : productos) {
-                            if(ind==productos.indexOf(a)){
-                                com.getPro().add(a);
-                                if(a instanceof Comidas){
-                                    total+=((Comidas)productos.get(ind)).getPrecio();
-                                }
-                                if(a instanceof Bebidas){
-                                    total+=((Bebidas)productos.get(ind)).getPrecio();
+                    if(productos.isEmpty()==false){
+                        Compras com=new Compras();
+                        char seguir='n';
+                        double total=0;
+                        do{
+                            imprimirelim();
+                            System.out.println("Ingrese un index para agregar a la carreta:");
+                            int ind=read.nextInt();
+                            for (Object a : productos) {
+                                if(ind==productos.indexOf(a)){
+                                    com.getPro().add(a);
+                                    if(a instanceof Comidas){
+                                        total+=((Comidas)productos.get(ind)).getPrecio();
+                                    }
+                                    if(a instanceof Bebidas){
+                                        total+=((Bebidas)productos.get(ind)).getPrecio();
+                                    }
                                 }
                             }
-                        }
-                        System.out.println("Desea ingresar otro producto a la carreta: ");
-                        seguir=read.next().charAt(0);
-                    }while(seguir!='n');
-                    com.setTotal(total);
-                    productos.add(com);
-                    System.out.println(com);;
+                            System.out.println("Desea ingresar otro producto a la carreta: ");
+                            seguir=read.next().charAt(0);
+                        }while(seguir!='n');
+                        com.setTotal(total);
+                        productos.add(com);
+                        System.out.println(com);
+                    }else
+                        System.out.println("no hay nada en la lista registrada");
                     break;
                 case 6:
                     String accum="";
@@ -176,32 +178,36 @@ static ArrayList productos= new ArrayList();
     
     public static void imprimirproductos(){
         String accum="";
-        for (Object p : productos) {
-            if(p instanceof Comidas){
-                accum+=p;
+        if(productos.isEmpty()==false){
+            for (Object p : productos) {
+                if(p instanceof Comidas){
+                    accum+=p;
+                }
+
             }
-            
-        }
-        for (Object p : productos) {
-            if(p instanceof Bebidas){
-                accum+=p;
+            for (Object p : productos) {
+                if(p instanceof Bebidas){
+                    accum+=p;
+                }
             }
-        }
-        System.out.println(accum);
+            System.out.println(accum);
+        }else
+            System.out.println("En la lista no hay productos");
     }
     
     public static void imprimirelim(){
         String accum="";
-        for (Object p : productos) {
-            if(p instanceof Comidas){
-                accum+=productos.indexOf(p)+"-"+p;
+        if(productos.isEmpty()==false){
+            for (Object p : productos) {
+                if(p instanceof Comidas){
+                    accum+=productos.indexOf(p)+"-"+p;
+                }
+                if(p instanceof Bebidas){
+                    accum+=productos.indexOf(p)+"-"+p;
+                }
             }
-            if(p instanceof Bebidas){
-                accum+=productos.indexOf(p)+"-"+p;
-            }
+            System.out.println(accum);
         }
-    
-        System.out.println(accum);
     }
 
 }
