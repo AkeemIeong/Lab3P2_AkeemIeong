@@ -9,9 +9,9 @@ import java.util.Date;
 import java.util.Scanner;
 public class Lab3P2_AkeemIeong {
 static Scanner read=new Scanner(System.in);
-    
+static ArrayList productos= new ArrayList();
     public static void main(String[] args) {
-        ArrayList productos= new ArrayList();
+        
         int op=0;
         do{
             System.out.println("1<-Agregar producto");
@@ -21,6 +21,7 @@ static Scanner read=new Scanner(System.in);
             System.out.println("5<-Comprar productos");
             System.out.println("6<-Listar las compras");
             System.out.println("7<-Salida");
+            op=read.nextInt();
             switch(op){
                 case 1:
                     int op2;
@@ -54,10 +55,56 @@ static Scanner read=new Scanner(System.in);
                     }
                     break;
                 case 2:
+                    imprimirelim();
+                    System.out.println("Ingrese el indice del producto que quiere eliminar");
+                    int elim=read.nextInt();
+                    for (Object a : productos) {
+                        if(elim==productos.indexOf(a)){
+                            productos.remove(elim);
+                        }
+                    }
                     break;
                 case 3:
+                    imprimirelim();
+                    System.out.println("Ingrese el indice del producto que quere modificar: ");
+                    int mod3=read.nextInt();
+                    for (Object a : productos) {
+                        if(mod3==productos.indexOf(a)){
+                            if(a instanceof Comidas){
+                                System.out.println("1<-Modificar Nombre");
+                                System.out.println("2<-Modificar Precio");
+                                System.out.println("3<-Modificar Fecha de vecimiento");
+                                int mod2=read.nextInt();
+                                switch(mod2){
+                                    case 1:
+                                        System.out.println("Ingrese el nuevo nombre: ");
+                                        String nname=read.next();
+                                        ((Comidas)productos.get(mod3)).setNombre(nname);
+                                        break;
+                                    case 2:
+                                        System.out.println("Ingrese el nuevo precio: ");
+                                        Double nprecio=read.nextDouble();
+                                        ((Comidas)productos.get(mod3)).setPrecio(nprecio);
+                                        break;
+                                    case 3:
+                                        System.out.println("Ingrese la nueva fecha de expiracion dd/mm/yyyy: ");
+                                        String ndate=read.next();
+                                        String []nda=ndate.split("/");
+                                        int nday=Integer.parseInt(nda[0]);
+                                        int nmes=Integer.parseInt(nda[1]);
+                                        int nano=Integer.parseInt(nda[2]);
+                                        Date nfe=new Date(nano-1900, nmes-1, nday);
+                                        ((Comidas)productos.get(mod3)).setFechav(nfe);
+                                        break;
+                                    }
+                                    break;
+                                
+                            }
+                        }
+                    }
                     break;
                 case 4:
+                    
                     break;
                 case 5:
                     break;
@@ -67,4 +114,35 @@ static Scanner read=new Scanner(System.in);
         }while(op!=7);
     }
     
+    public static void imprimirproductos(){
+        String accum="";
+        for (Object p : productos) {
+            if(p instanceof Comidas){
+                accum+=p;
+            }
+            
+        }
+        for (Object p : productos) {
+            if(p instanceof Bebidas){
+                accum+=p;
+            }
+        }
+        System.out.println(accum);
+    }
+    
+    public static void imprimirelim(){
+        String accum="";
+        for (Object p : productos) {
+            if(p instanceof Comidas){
+                accum+=productos.indexOf(p)+"-"+p;
+            }
+            if(p instanceof Bebidas){
+                accum+=productos.indexOf(p)+"-"+p;
+            }
+        }
+    
+        System.out.println(accum);
+    }
+
 }
+

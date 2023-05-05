@@ -32,8 +32,8 @@ public class Bebidas extends Productos{
 
     @Override
     public String toString() {
-        return "tamano=" + tamano +
-                super.toString();
+        return super.toString() +
+                "Tamano de la bebida: " + tamano;
     }
     
     
