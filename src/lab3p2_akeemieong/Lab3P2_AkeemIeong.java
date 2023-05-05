@@ -163,7 +163,12 @@ static ArrayList productos= new ArrayList();
                     System.out.println(com);;
                     break;
                 case 6:
-                    
+                    String accum="";
+                    for (Object a : productos) {
+                        if(a instanceof Compras){
+                            accum+=productos.indexOf(a)+"-"+a;
+                        }
+                    }
                     break;
             }
         }while(op!=7);

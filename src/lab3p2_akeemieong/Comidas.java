@@ -14,19 +14,13 @@ public class Comidas extends Productos{
         super();
     }
 
-    public Comidas(Date fechav, String nombre, double precio,char ven) {
+    public Comidas( String nombre, double precio,char ven) {
         super(nombre, precio);
-        this.fechav = fechav;
+
         this.ven=ven;
     }
 
-    public Date getFechav() {
-        return fechav;
-    }
-
-    public void setFechav(Date fechav) {
-        this.fechav = fechav;
-    }
+ 
 
     public char getVen() {
         return ven;
@@ -39,8 +33,7 @@ public class Comidas extends Productos{
     @Override
     public String toString() {
         return  super.toString()
-                +"Fecha de vencimiento: " + fechav
-                +"\nEstado de vencimiento: "+ven;
+                +"Estado de vencimiento: "+ven+"\n";
     }
     
     
