@@ -4,17 +4,12 @@
  */
 package lab3p2_akeemieong;
 
-/**
- *
- * @author surface pro
- */
+import java.util.Scanner;
 public class Lab3P2_AkeemIeong {
-
-    /**
-     * @param args the command line arguments
-     */
+static Scanner read=new Scanner(System.in);
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        
     }
     
 }
