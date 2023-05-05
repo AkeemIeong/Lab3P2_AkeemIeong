@@ -62,16 +62,20 @@ static ArrayList productos= new ArrayList();
                     }
                     break;
                 case 2:
-                    imprimirelim();
-                    System.out.println("Ingrese el indice del producto que quiere eliminar");
-                    int elim=read.nextInt();
-                    if(elim>=0&&elim<productos.size()){
-                        for (Object a : productos) {
-                            if(elim==productos.indexOf(a)){
-                                productos.remove(elim);
+                    if(productos.isEmpty()==false){
+                        imprimirelim();
+                        System.out.println("Ingrese el indice del producto que quiere eliminar");
+                        int elim=read.nextInt();
+                        if(elim>=0&&elim<productos.size()){
+                            for (Object a : productos) {
+                                if(elim==productos.indexOf(a)){
+                                    productos.remove(elim);
+                                }
                             }
-                        }
-                    }
+                        }else
+                            System.out.println("El indice que ingreso no es valido");
+                    }else
+                        System.out.println("No hay nada en la lista ");
                     break;
                 case 3:
                     if(productos.isEmpty()==false){
