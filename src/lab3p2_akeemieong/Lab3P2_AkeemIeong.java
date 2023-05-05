@@ -58,9 +58,11 @@ static ArrayList productos= new ArrayList();
                     imprimirelim();
                     System.out.println("Ingrese el indice del producto que quiere eliminar");
                     int elim=read.nextInt();
-                    for (Object a : productos) {
-                        if(elim==productos.indexOf(a)){
-                            productos.remove(elim);
+                    if(elim>=0&&elim<productos.size()){
+                        for (Object a : productos) {
+                            if(elim==productos.indexOf(a)){
+                                productos.remove(elim);
+                            }
                         }
                     }
                     break;
@@ -68,7 +70,8 @@ static ArrayList productos= new ArrayList();
                     imprimirelim();
                     System.out.println("Ingrese el indice del producto que quere modificar: ");
                     int mod3=read.nextInt();
-                    for (Object a : productos) {
+                    if(mod3>=0&&mod3<productos.size()){
+                        for (Object a : productos) {
                         if(mod3==productos.indexOf(a)){
                             if(a instanceof Comidas){
                                 System.out.println("1<-Modificar Nombre");
@@ -98,13 +101,37 @@ static ArrayList productos= new ArrayList();
                                         break;
                                     }
                                     break;
-                                
+                            }
+                            if(a instanceof Bebidas){
+                                System.out.println("1<-Modificar Nombre");
+                                System.out.println("2<-Modificar Precio");
+                                System.out.println("3<-Modificar el tamano de la bebida");
+                                int mod2=read.nextInt();
+                                switch(mod2){
+                                    case 1:
+                                        System.out.println("Ingrese el nuevo nombre: ");
+                                        String nname=read.next();
+                                        ((Bebidas)productos.get(mod3)).setNombre(nname);
+                                        break;
+                                    case 2:
+                                        System.out.println("Ingrese el nuevo precio: ");
+                                        Double nprecio=read.nextDouble();
+                                        ((Bebidas)productos.get(mod3)).setPrecio(nprecio);
+                                        break;
+                                    case 3:
+                                        System.out.println("Ingrese la nuevo tamano de la bebida: ");
+                                        int ntam=read.nextInt();
+                                        ((Bebidas)productos.get(mod3)).setTamano(ntam);
+                                        break;
+                                    }
                             }
                         }
                     }
+                }else
+                    System.out.println("El indice que ingreso no es valido");
                     break;
                 case 4:
-                    
+                    imprimirproductos();
                     break;
                 case 5:
                     break;

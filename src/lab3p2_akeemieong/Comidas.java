@@ -29,7 +29,8 @@ public class Comidas extends Productos{
 
     @Override
     public String toString() {
-        return "fechav=" + fechav + super.toString();
+        return  super.toString()
+                +"Fecha de vencimiento: " + fechav+"\n";
     }
     
     
