@@ -35,17 +35,11 @@ static ArrayList productos= new ArrayList();
                             System.out.println("Ingrese el precio: ");
                             double precio=read.nextDouble();
                             if(precio>0){
-                                System.out.println("Ingrese una fecha dd/mm/yyyy");
-                                String fecha= read.next();
-                                String []fech=fecha.split("/");
-                                int dia=Integer.parseInt(fech[0]);
-                                int mes=Integer.parseInt(fech[1]);
-                                int ano=Integer.parseInt(fech[2]);
-                                Date fe=new Date(ano-1900, mes-1,dia);
+                                
                                 System.out.println("Ingrese si esta vencido s/n: ");
                                 char vencido=read.next().charAt(0);
                                 if(vencido=='s'||vencido=='n'||vencido=='S'||vencido=='n'){
-                                    productos.add(new Comidas(fe, nombre, precio,vencido));
+                                    productos.add(new Comidas( nombre, precio,vencido));
                                 }else
                                     System.out.println("Estado de comida no esta bien registrado");
                             }else
@@ -89,8 +83,7 @@ static ArrayList productos= new ArrayList();
                             if(a instanceof Comidas){
                                 System.out.println("1<-Modificar Nombre");
                                 System.out.println("2<-Modificar Precio");
-                                System.out.println("3<-Modificar Fecha de vecimiento");
-                                System.out.println("4<-Modificar si esta vencido o no");
+                                System.out.println("3<-Modificar si esta vencido o no");
                                 int mod2=read.nextInt();
                                 switch(mod2){
                                     case 1:
@@ -104,16 +97,6 @@ static ArrayList productos= new ArrayList();
                                         ((Comidas)productos.get(mod3)).setPrecio(nprecio);
                                         break;
                                     case 3:
-                                        System.out.println("Ingrese la nueva fecha de expiracion dd/mm/yyyy: ");
-                                        String ndate=read.next();
-                                        String []nda=ndate.split("/");
-                                        int nday=Integer.parseInt(nda[0]);
-                                        int nmes=Integer.parseInt(nda[1]);
-                                        int nano=Integer.parseInt(nda[2]);
-                                        Date nfe=new Date(nano-1900, nmes-1, nday);
-                                        ((Comidas)productos.get(mod3)).setFechav(nfe);
-                                        break;
-                                    case 4:
                                         System.out.println("");
                                         break;
                                         
@@ -154,13 +137,30 @@ static ArrayList productos= new ArrayList();
                     imprimirproductos();
                     break;
                 case 5:
+                    Compras com=new Compras();
                     char seguir='n';
+                    double total=0;
                     do{
-                        
-                        
+                        imprimirelim();
+                        System.out.println("Ingrese un index para agregar a la carreta:");
+                        int ind=read.nextInt();
+                        for (Object a : productos) {
+                            if(ind==productos.indexOf(a)){
+                                com.getPro().add(a);
+                                if(a instanceof Comidas){
+                                    total+=((Comidas)productos.get(ind)).getPrecio();
+                                }
+                                if(a instanceof Bebidas){
+                                    total+=((Bebidas)productos.get(ind)).getPrecio();
+                                }
+                            }
+                        }
                         System.out.println("Desea ingresar otro producto a la carreta: ");
                         seguir=read.next().charAt(0);
-                    }while(seguir=='n');
+                    }while(seguir!='n');
+                    com.setTotal(total);
+                    productos.add(com);
+                    System.out.println(com);;
                     break;
                 case 6:
                     
